@@ -17,6 +17,24 @@ inputs:
     description: 'Enter the workspace path to save databases in'
     required: true
     default: '.'
+  account-id-file:
+    description: 'Your MaxMind account ID. This was formerly known as `UserId`. This in particular uses the `GEOIPUPDATE_ACCOUNT_ID_FILE` environment variable.'
+  license-key-file:
+    description: 'Your case-sensitive MaxMind license key. This in particular uses the `GEOIPUPDATE_LICENSE_KEY_FILE` environment variable.'
+  host:
+    description: 'The host name of the server to use. The default is `https://updates.maxmind.com`.'
+  proxy:
+    description: 'The proxy host name or IP address. You may optionally specify a port number, e.g., `127.0.0.1:8888`. If no port number is specified, 1080 will be used.'
+  proxy-user-password:
+    description: 'The proxy username and password, separated by a colon. For instance, `username:password`.'
+  preserve-file-times:
+    description: 'Whether to preserve modification times of files downloaded from the server. This option is either `0` or `1`. The default is `0`.'
+  lock-file:
+    description: 'The lock file to use. This ensures only one `geoipupdate` process can run at a time. Note: Once created, this lockfile is not removed from the filesystem. The default is `.geoipupdate.lock` under the `dp-path`.'
+  retry-for:
+    description: 'The amount of time to retry for when errors during HTTP transactions are encountered. It can be specified as a (possibly fractional) decimal number followed by a unit suffix. Valid time units are `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`. The default is `5m` (5 minutes).'
+  parallelism:
+    description: 'The maximum number of parallel database downloads. The default is 1, which means that databases will be downloaded sequentially.'
 
 runs:
   using: 'docker'
@@ -24,6 +42,15 @@ runs:
 
   env:
     GEOIPUPDATE_ACCOUNT_ID: ${{ inputs.account-id }}
+    GEOIPUPDATE_ACCOUNT_ID_FILE: ${{ inputs.account-id-file }}
     GEOIPUPDATE_LICENSE_KEY: ${{ inputs.license-key }}
+    GEOIPUPDATE_LICENSE_KEY_FILE: ${{ inputs.license-key-file }}
     GEOIPUPDATE_EDITION_IDS: ${{ inputs.edition-ids }}
     GEOIPUPDATE_DB_DIR: ${{ inputs.db-path }}
+    GEOIPUPDATE_HOST: ${{ inputs.host }}
+    GEOIPUPDATE_PROXY: ${{ inputs.proxy }}
+    GEOIPUPDATE_PROXY_USER_PASSWORD: ${{ inputs.proxy-user-password }}
+    GEOIPUPDATE_PRESERVE_FILE_TIMES: ${{ inputs.preserve-file-times }}
+    GEOIPUPDATE_LOCK_FILE: ${{ inputs.lock-file }}
+    GEOIPUPDATE_RETRY_FOR: ${{ inputs.retry-for }}
+    GEOIPUPDATE_PARALLELISM: ${{ inputs.parallelism }}
