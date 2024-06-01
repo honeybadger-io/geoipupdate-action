@@ -79,6 +79,11 @@ The maximum number of parallel database downloads. The default is
 
 ## Example usage
 ```yaml
+on:
+  schedule:
+    # Deploy every day at midnight to keep the maxmind db up to date
+    - cron: '0 0 * * *'
+...
     steps:
       - name: Checkout
         uses: actions/checkout@v4

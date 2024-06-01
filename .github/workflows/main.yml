@@ -1,4 +1,10 @@
-on: [push]
+on:
+  schedule:
+    # Deploy every day at midnight to keep the maxmind db up to date
+    - cron: '0 0 * * *'
+  push:
+    branches:
+      - main
 
 jobs:
   updater:
