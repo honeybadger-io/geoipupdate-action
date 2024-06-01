@@ -81,10 +81,10 @@ The maximum number of parallel database downloads. The default is
 ```yaml
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: MaxMind GeoIP Updater
-        uses: yortyrh/geoipupdate-action@v4
+        uses: yortyrh/geoipupdate-action@v6
         with:
           account-id: ${{ secrets.GEOIPUPDATE_ACCOUNT_ID }}
           license-key: ${{ secrets.GEOIPUPDATE_LICENSE_KEY }}
