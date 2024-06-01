@@ -81,7 +81,7 @@ The maximum number of parallel database downloads. The default is
 ```yaml
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: MaxMind GeoIP Updater
         uses: yortyrh/geoipupdate-action@v4
